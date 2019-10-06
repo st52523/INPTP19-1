@@ -10,8 +10,8 @@ namespace INPTPZ1
     /// </summary>
     class Program
     {
-        private const int WIDTH_OF_PICTURE = 300; //sirka - x
-        private const int HEIGHT_OF_PICTURE = 300; //vyska - y
+        private const int WIDTH_OF_PICTURE = 300; //width - position of x
+        private const int HEIGHT_OF_PICTURE = 300; //height - position of y
         private static double xmin, xmax, ymin, ymax, xstep, ystep;
         private static List<ComplexNumber> roots;
         private static Bitmap picture;
@@ -25,8 +25,10 @@ namespace INPTPZ1
             {
                 if (args.Length == 4)
                     SetLimits(args);
-                else
+                else if (args.Length == 0)
                     SetLimits();
+                else
+                    throw new ArgumentException("Bad number of arguments!");
 
                 Initialization();
                 SetPolynom();
@@ -39,8 +41,7 @@ namespace INPTPZ1
             }
             catch (Exception ex)
             {
-
-                throw new Exception("Err:" + ex + "!");
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -163,10 +164,10 @@ namespace INPTPZ1
 
         private static void SetLimits(string[] args)
         {
-            Double.TryParse(args[0], out xmin);
-            Double.TryParse(args[1], out xmax);
-            Double.TryParse(args[2], out ymin);
-            Double.TryParse(args[3], out ymax);
+            xmin = Double.Parse(args[0]);
+            xmax = Double.Parse(args[1]);
+            ymin = Double.Parse(args[2]);
+            ymax = Double.Parse(args[3]);
         }
     }
 }
